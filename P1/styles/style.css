@@ -1,0 +1,17 @@
+canvas {
+    padding: 5px;
+    margin: 10px;
+}
+
+#gameDiv{
+    float: left;
+}
+
+#gameDiv p{
+	float: right;
+	background-color: white;
+}
+
+body{
+	background-image: url("http://downloadforpc.net/wp-content/uploads/2015/05/crossy-road.jpg")
+}

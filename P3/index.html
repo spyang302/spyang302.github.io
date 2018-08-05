@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A* Pathfinding</title>
+	<link rel="stylesheet" href="styles/style.css">
+  </head>
+  <body>
+	  <div id="key">
+	  <p>Key:</p>
+	  <p>Traversed Path: Grey </p>
+	  <p>g(x) = Pink</p>
+	  <p>h(x) = Red</p>
+	  <p>f(x) = Blue</p>
+	  <p>INDEX = Yellow</p>
+	  </div>
+	  <script src="js/main.js"></script>
+	  <div id="inputForms">
+		  <form>
+		  <label>Rows:</label> <input type="text" id="rows" /> <br/> 
+		  <label>Columns:</label> <input type="text" id="cols" /> <br/>
+		  <input name="login" type="button" value="Configure Grid" onclick="configureGrid()" />
+		  </form>
+		  <br />
+		  <form>
+		  <label>Index:</label> <input type="text" id="index" /> <br/> 
+		  <input name="login" type="button" value="Set Obstacle" onclick="setObstacle()" />
+		  <p id="steps">Total Steps:</p>
+		  <p id="length">Total Length:</p>
+		  </form>
+	  </div>
+  </body>
+</html>

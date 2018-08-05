@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html lang=en-US>
+	<head>
+		<meta charset=UTF-8>
+		<title>The Sun King</title>
+		<link rel=icon type=image/x-icon href=resources/favicon.ico>
+		<link rel=stylesheet type=text/css href=includes/style.css>
+		<script type=text/javascript src=includes/main.js></script>
+		<script type=text/javascript src=includes/events.js></script>
+		<script type=text/javascript src=includes/actions.js></script>
+	</head>
+	<body id=body class="centered float-center">
+		<table>
+			<tr><td class=pad-top>
+				<div class="card mar-hor">
+					<h1 class=float-left>
+						<img width=40 height=40 src=resources/coa.png>&nbsp;
+						The&nbsp;Sun&nbsp;King
+					</h1>
+					<span class=float-right>
+						<button id=btnTurn class=button onclick=newTurn() style=display:none>Next&nbsp;Turn</button>
+						<button id=btnGame class=button onclick=game()>Return to Game</button>
+						<button id=btnHelp class=button onclick=help()>Help</button>
+						<button id=btnInit class=button onclick=init()>New Game</button>
+					</span>
+				</div>
+			</td></tr><tr><td class=pad-bottom>
+				<table id=divGame class=mar-left>
+					<tr><td class=pad-top colspan=2>
+						<div class="card mar-right">
+							<h2>
+								<img width=24 height=24 src=resources/event.png>&nbsp;
+								Event
+							</h2>
+							<ul>
+								<li id=evtTxt style=width:512px>Event text goes here.</li>
+								<ul id=ulBtnEvt>
+									<li><button id=btnEvt1 class=button onclick=handleBtnEvt1() style=width:512px>Option1</button></li>
+									<li><button id=btnEvt2 class=button onclick=handleBtnEvt2() style=width:512px>Option2</button></li>
+								</ul>
+								<li id=liEvtOpt><br><b>Option&nbsp;selected:</b> <span id=spanEvtOpt>N/A</span></li>
+							</ul>
+						</div>
+					</td></tr><tr><td>
+						<table>
+							<tr><td class=pad-top><div class="card mar-right" style=min-width:384>
+								<h2>
+									<img width=24 height=24 src=resources/parliament.png>&nbsp;
+									Parliament
+								</h2>
+								<table>
+									<tr>
+										<td><img width=16px height=16px src=resources/nobles.png alt=Nobility></td>
+										<td>&nbsp;<span id=spanApprovalNobles>67</span>%&nbsp;Approval</td>
+										<tooltip>Your approval rate among the nobility.</tooltip>
+									</tr><tr>
+										<td><img width=16px height=16px src=resources/clergy.png alt=Clergy></td>
+										<td>&nbsp;<span id=spanApprovalClergy>50</span>%&nbsp;Approval</td>
+										<tooltip>Your approval rate among the clergy.</tooltip>
+									</tr><tr>
+										<td><img width=16px height=16px src=resources/common.png alt=Commoners></td>
+										<td>&nbsp;<span id=spanApprovalCommon>33</span>%&nbsp;Approval</td>
+										<tooltip>Your approval rate among the commoners.</tooltip>
+									</tr>
+								</table>
+							</div></td></tr>
+							<tr><td class=pad-top><div class="card mar-right" style=min-width:384>
+								<h2>
+									<img width=24 height=24 src=resources/pna.png>&nbsp;
+									Policies&nbsp;&amp;&nbsp;Actions
+								</h2>
+								<ul>
+									<li><h3><u>Taxes</u></h3></li>
+									<li>
+										<img width=16px height=16px src=resources/nobles.png alt=Nobility>
+										<input id=slideTaxRateNobles type=range min=0 max=100 step=1 value=10 onchange=handleSlideTaxRateNobles()>
+										&nbsp;<span id=spanTaxRateNobles>10</span>%
+										<tooltip>Tax rate for the nobility.</tooltip>
+									</li><li>
+										<img width=16px height=16px src=resources/clergy.png alt=Clergy>
+										<input id=slideTaxRateClergy type=range min=0 max=100 step=1 value=10 onchange=handleSlideTaxRateClergy()>
+										&nbsp;<span id=spanTaxRateClergy>0</span>%
+										<tooltip>Tax rate for the clergy.</tooltip>
+									</li><li>
+										<img width=16px height=16px src=resources/common.png alt=Commoners>
+										<input id=slideTaxRateCommon type=range min=0 max=100 step=1 value=10 onchange=handleSlideTaxRateCommon()>
+										&nbsp;<span id=spanTaxRateCommon>10</span>%
+										<tooltip>Tax rate for the commoners.</tooltip>
+									</li><li>
+										<hr>
+									</li><li><h3><u>Finance</u></h3></li>
+									<li>Current&nbsp;loans:&nbsp;<span loansCurrent>0</span></li>
+									<li>
+										<button id=btnLoanTake  class=button onclick=loanTake() >Take a Loan </button>
+										<button id=btnLoanRepay class=button onclick=loanRepay()>Repay a Loan</button>
+									</li>
+								</ul>
+							</div></td></tr>
+							<tr><td class=pad-top><div class="card mar-right" style=min-width:384>
+								<h2>
+									<img width=24 height=24 src=resources/overview.png>&nbsp;
+									Overview
+								</h2>
+								<ul>
+									<li>Year:&nbsp;<span id=spanYearCurrent>1700</span></li>
+									<li>Turn:&nbsp;<span id=spanTurnCount>0</span></li>
+									<li>Population:&nbsp;<span id=spanPopulationTotal>21000000</span></li>
+								</ul>
+							</div></td></tr>
+						</table>
+					</td><td class=pad-top><div class="card mar-right" style=min-width:384>
+						<h2>
+							<img width=24 height=24 src=resources/accounting.png>&nbsp;
+							Accounting
+						</h2>
+						<table>
+							<tr>
+								<td><b>Current&nbsp;Treasury:&nbsp;</b></td>
+								<td><span class=float-left><b>£</b></span><span id=spanTreasuryCurrent class=float-right><b>0</b></span></td>
+							</tr><tr>
+								<td colspan=2><hr></td>
+							</tr><tr>
+								<td colspan=2><h3><u>Receipts:</u></h3></td>
+							</tr><tr>
+								<td>Noble&nbsp;Tax:&nbsp;</td>
+								<td><span class=float-left>£</span><span id=spanTaxAmtNobles class=float-right>0</span></td>
+							</tr><tr>
+								<td>Clergy&nbsp;Tax:&nbsp;</td>
+								<td><span class=float-left>£</span><span id=spanTaxAmtClergy class=float-right>0</span></td>
+							</tr><tr>
+								<td>Commoner&nbsp;Tax:&nbsp;</td>
+								<td><span class=float-left>£</span><span id=spanTaxAmtCommon class=float-right>0</span></td>
+							</tr><tr>
+								<td><b>Total&nbsp;Tax:&nbsp;</b></td>
+								<td><span class=float-left><b>£</b></span><span id=spanTaxAmtTotal class=float-right><b>0</b></span></td>
+							</tr><tr>
+								<td><b>From&nbsp;Events:&nbsp;</b></td>
+								<td><span class=float-left><b>£</b></span><span id=spanReceiptEvt class=float-right><b>0</b></span></td>
+							</tr><tr>
+								<td colspan=2><hr></td>
+							</tr><tr>
+								<td colspan=2><h3><u>Outlays:</u></h3></td>
+							</tr><tr>
+								<td>Loan&nbsp;Interest:&nbsp;</td>
+								<td><span class=float-left>£</span><span id=spanOutlayInterest class=float-right>0</span></td>
+							</tr><tr>
+								<td>From&nbsp;Events:&nbsp;</td>
+								<td><span class=float-left>£</span><span id=spanOutlayEvt class=float-right>0</span></td>
+							</tr><tr>
+								<td>From&nbsp;Corruption:&nbsp;</td>
+								<td><span class=float-left>£</span><span id=spanOutlayCorrupt class=float-right>0</span></td>
+							</tr><tr>
+								<td colspan=2><hr></td>
+							</tr><tr>
+								<td colspan=2><h3><u>Summary:</u></h3></td>
+							</tr><tr>
+								<td>Total&nbsp;Receipts:&nbsp;</td>
+								<td><span class=float-left>£</span><span id=spanReceiptTotal class=float-right>0</span></td>
+							</tr><tr>
+								<td>Total&nbsp;Outlays:&nbsp;</td>
+								<td><span class=float-left>£</span><span id=spanOutlayTotal class=float-right>0</span></td>
+							</tr><tr>
+								<td><b>Net&nbsp;Change:&nbsp;</b></td>
+								<td><span class=float-left><b>£</b></span><span id=spanNetChange class=float-right><b>0</b></span></td>
+							</tr><tr>
+								<td colspan=2><hr></td>
+							</tr><tr>
+								<td><b>Future&nbsp;Treasury:&nbsp;</b></td>
+								<td><span class=float-left><b>£</b></span><span id=spanTreasuryFuture class=float-right><b>0</b></span></td>
+							</tr>
+						</table>
+					</div></td></tr>
+				</table>
+			</td></tr><tr id=divHelp><td class=pad-top style=width:512px>
+				<div class="card mar-full" style=display:none>
+					<h2>Helptext</h2>
+					<p>You play as the ruler of France in the 1700s and must try to control the people and
+					stay in power for as long as possible. You will be presented with various issues of the
+					state which you must decide on. Your decisions will affect your approval ratings for
+					each of the three estates: the Noblity, the Clergy, and the Commoners. If your approval
+					rating for one group gets too low they will overthrow you. You also control the amount
+					each estate is taxed, but be careful. Raising taxes gets you more money, but it also
+					decreases approval rating and increases the money lost to corruption. You can also raise
+					money by taking loans, but these will have to be payed back wih interest.</p>
+				</div>
+			</td></tr><tr id=divGameOver><td class=pad-top style=width:512px>
+				<div class="card mar-full" style=display:none>
+					<h2>Game&nbsp;Over</h2>
+					<p>Vive&nbsp;la&nbsp;revolución!</p>
+					<p>Turns&nbsp;Reigned:&nbsp;<span id=spanTurnsReigned>0</span></p>
+				</div>
+			</td></tr>
+		</table>
+		<script>
+			init();
+			playMusic();
+		</script>
+	</body>
+</html>

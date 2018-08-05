@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Ball</title>
+    	<style type="text/css">
+      		canvas { border: 3px solid black; }
+    	</style>
+
+	<script type="text/javascript">
+
+//BEGIN LIBRARY CODE
+	// Global variable here
+	var x = 100;
+	var y = 100;
+	var ball;
+	var vx = Math.random() * (3 - 1) + 1;
+	var vy = Math.random() * (3 - 1) + 1;
+	var BALL_RADIUS = 20;
+	var isUp = false;
+	var color = "blue";
+	var notBlue = false;
+	var randomInt;
+	var previousRandomInt = 2;
+
+	function Ball() {
+		if(notBlue == false){
+			this.color = "blue";
+		}
+		
+		else{
+			if(randomInt == 1){
+				this.color = "green";
+			}
+			else if(randomInt == 2){
+				this.color = "red";
+			}
+			else {
+				this.color = "purple";
+			}
+			
+		}
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, BALL_RADIUS, 0, Math.PI * 2);
+		ctx.fillStyle = this.color;
+		ctx.fill();
+		ctx.closePath();
+	}
+	
+
+
+	var dx = 2;
+	var dy = 4;
+	var WIDTH;
+	var HEIGHT;
+	var ctx;
+	var interval = 20;
+ 	var canvas;
+
+	function init()
+	{
+		canvas = document.getElementById('canvas');
+		ctx = document.getElementById('canvas').getContext('2d');
+		WIDTH = ctx.canvas.width; // not with the canvas 'variable'
+  		HEIGHT = ctx.canvas.height;
+
+		// call setInterval to request browser to run function every 
+		// X milli sec
+		setInterval( draw, interval );
+	}
+
+
+	function drawball() 
+	{
+		ball = Ball();
+	}
+
+
+		function onMouseClick(evt) 
+		{
+
+
+			if (evt.pageX > x - 25  && evt.pageX < x + 25 && evt.pageY > y - 30 && evt.pageY < y +30) 
+			{
+	    			randomInt = Math.floor(Math.random() * (4 - 1) + 1);
+					while(previousRandomInt == randomInt){
+						randomInt = Math.floor(Math.random() * (4 - 1) + 1);
+					}
+					previousRandomInt = randomInt;
+					notBlue = true;
+	  		}    
+			
+
+		}
+	
+	function rect(x,y,w,h) 
+	{
+  		ctx.beginPath();
+  		ctx.rect(x,y,w,h);
+  		ctx.closePath();
+  		ctx.fill();
+	}
+
+	function clear() 
+	{
+  		ctx.clearRect(0, 0, WIDTH, HEIGHT);
+	}
+	//END LIBRARY CODE
+
+	function draw()
+	{
+		clear();
+		drawball();
+		canvas.addEventListener('mousedown', onMouseClick, false);
+		
+		// direction of change
+		if( x + vx > WIDTH - BALL_RADIUS || x + vx < 0  )
+	        vx = -vx;
+	
+		// is it below ground
+		if( y + vy > HEIGHT - BALL_RADIUS) 
+		{
+	        vy = -vy;
+	        isUp = true;
+		}
+		// or in the ceiling (0,0) is top left corner
+		else if( y + vy < 0 ) 
+		{
+	        vy = -vy;
+	        isUp = false;
+		}
+	
+	
+	    if( isUp ) 
+		{
+	    	vy += 1;  // adding 'gravity' 
+	        if( vy >= 0 )
+				isUp = false;
+	    }
+			
+		else // down
+		{
+	    	vy += 1; // adding 'gravity'
+			if(y + vy > HEIGHT - BALL_RADIUS){
+				vy = 0;
+			}
+	    }
+	
+	// check left wall
+	if( x - BALL_RADIUS < 0 ){
+		x =  BALL_RADIUS;
+		vx = -vx;
+	}
+	
+	if( x + vx > WIDTH - BALL_RADIUS){
+		x = WIDTH + 200;
+	}
+	
+	
+			
+	x += vx;
+ 	y += vy;
+	
+	}
+
+	
+function redraw(){
+	notBlue = false;
+	vy = Math.random() * (3 - 1) + 1;
+	vx = Math.random() * (3 - 1) + 1;
+	x = 100;
+	y = 100;
+}
+		
+</script>
+</head>
+
+<!-- HERE we add an explicit call to the draw() function -->
+<body onload="init()">
+<canvas id="canvas" width="300" height="300">
+
+</canvas>
+<button onclick="redraw()">restart</button>
+</body>
+</html>

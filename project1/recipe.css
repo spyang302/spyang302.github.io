@@ -1,0 +1,100 @@
+body{
+	background-image: url("http://cobweb.cs.uga.edu/~mehdi/teaching/4300/images/silverware.jpg");
+}
+
+#header{
+	background-color: #F0F0F0;
+	width: 97%;
+	margin: auto;
+}
+
+#header h1{
+	text-decoration: underline;
+	color: #A4A400;
+	text-align: center;
+	font-size: 22pt;
+	font-family: "Lucida Sans Unicode"; 
+} 
+
+.pieImage{
+	padding-left: 16px;
+}
+
+p{
+	font-family: "Georgia";
+	color: #404040;
+	padding-left: 15px;
+}
+
+hr{
+	margin-left: 15px;
+}
+
+.headings{
+	background-color: #F0F0F0;
+	width: 97%;
+	margin: auto;
+}
+
+.headings h2{
+	text-decoration: underline;
+	color: #A4A400;
+	text-align: left;
+	font-size: 18pt;
+	font-family: "Helvetica"; 
+	font-weight: normal;
+}
+
+#ingredients li{
+	margin-left: 16px;
+	font-family: "Georgia";
+	color: #404040;
+}
+
+.tablespoons{
+	text-decoration: underline;
+	border-bottom: 1px dotted black;
+}
+
+.notP{
+	font-family: "Georgia";
+	color: #404040;
+	padding-left: 0px;
+}
+
+ol li{
+	margin-left: 16px;
+}
+
+.userComments{
+	width:90%;
+	margin-left: 42px;
+	background-color: #FFFFA8;
+	
+}
+
+.userComments p{
+	font-style: italic;
+}
+.links{
+	padding-left: 15px;
+	color: #A4A400;
+	font-family: "Arial"; 
+}
+
+.pre{
+	font-family: "Courier";
+	padding-left: 15px;
+}
+
+#css{
+	padding-left: 0px;
+}
+
+ul li{
+	list-style-image: url("http://cobweb.cs.uga.edu/~mehdi/teaching/4300/images/pie_icon.gif");
+}
+
+#LOL{
+	text-decoration:line-through;
+}

@@ -1,0 +1,13 @@
+I did not have a default map because I give the user freedom to choose their own start and end points
+Final values F(x), H(x) and G(x) are displayed at the bottom
+Final Path is drawn
+Final Length and steps displayed
+Animation is smooth, it is not in canvas so it is instant
+I cannot control speed of animation
+I have at least 500 cells support size and configurable
+I can place my obstacles anywhere
+I have a Goal and start
+I do not have a stepped speed
+I have a grademe and report text files
+I have demo and youtube video
+I gave my game a tabletop look and feel since it is an HTML table

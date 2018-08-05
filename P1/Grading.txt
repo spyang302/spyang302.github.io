@@ -1,0 +1,3 @@
+Definition of Game Objects: I have Cars, Logs, Walls, Finish Zone, and The Player Object
+Animation of Game Objects Sprite Sheet: I have moved everything that needed to be moved and player control with the keyboard
+Interaction 
